@@ -1,0 +1,106 @@
+<link rel="stylesheet" type="text/css" href="res/css/register_user/base.css"/>
+
+<!-- <script>
+  $(window).ready(function(){  
+  var access_token = window.location.search.substring(1);
+  $.ajax({ url: '/api/gym_users?' + access_token ,
+          context: document.body,
+          success: function(response){
+             // alert("done");
+          },
+          error: function (response) {
+            // document.getElementById("error").style.display = "block";
+            // $('#error').delay(4000).fadeOut(300);
+            // var resp = response.responseText
+            // console.log(resp)
+            // console.log(response)
+            alert("FAIL")
+          },
+          cache: false,
+        });
+  });
+</script> -->
+
+<div id="">
+<div ng-include src="'Views/admin/header.html'" style="padding-top: 20px; padding-left: 20px;"></div>
+<div class="container"> 
+<div class="row">
+<div class="col-md-3 col-sm-0 col-xs-0"></div>
+<div class="col-md-3 col-sm-0 col-xs-0"></div><br/>
+<div class="col-md-6 col-sm-12" id = "success" style="color: white;font-size: 13px;background-color: #4caf50;border-radius: 5px; display: none; width: 90%; text-align: center; margin-left: 5%;">
+  
+</div> 
+</div>
+</div>
+<div class="container " style="margin-top: -3%"> 
+<div class="row">
+<div class="col-md-4 col-sm-0 col-xs-0"></div>
+<div class="col-md-4 col-sm-0 col-xs-0"></div><br/>
+<div class="col-md-6 col-sm-12" id = "error" style="color: white;font-size: 13px;background-color: #af4c4c;border-radius: 5px; display: none; width: 90%; text-align: center; margin-left: 5%;">
+  User Already Exists / Enter the Correct Details !
+</div> 
+</div>
+</div>
+
+<div class="container " id="main_form" style="margin-top: 3%;"> 
+
+<!-- <iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe" style="display: none;"></iframe> -->
+  <div id="contact" style="margin-top: 0%; margin-bottom: 10%">
+    <h3>New Course Form</h3>
+    <h4>Enter the details below</h4>
+
+    
+    <form id = "myForm" action="/api/gym_users" method="post" target="dummyframe">
+    <fieldset>
+      <input placeholder="Course Name" type="text" tabindex="1" required autofocus name="name" style="width: 100%; padding-left: 10px;">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Author" type="text" tabindex="2" required name="author" style="width: 100%; padding-left: 10px; ">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Subject" type="text" tabindex="3" required name="subject">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Cover Icon URL" type="text" tabindex="4" required name="cover_icon">
+    </fieldset>
+
+    
+      <button name="submit" type="submit" id="contact-submit">Submit</button>
+      <script>
+        var unsorted_url = window.location.pathname.split('userId=');
+        unsorted_url = unsorted_url[1].split('/access_token=');
+        console.log(unsorted_url)
+        var access_token = unsorted_url[1]
+        var userId = unsorted_url[0]
+        console.log("access_token " + access_token)
+
+        // alert("WORKING")
+        var url = '/api/students/' + userId + '?' + 'access_token=' + access_token
+        alert(url)
+        alert("=====")
+
+      $('#myForm')
+      .ajaxForm({
+        url : '/api/courses', // or whatever
+        dataType : 'html',
+        success : function (response) {
+            
+            alert("Credentials Submitted Successfully. You'll be redirected to the admin page now !")
+            var url = '/admin/courses/userId=' +userId + '/access_token=' + access_token
+            window.location.href = url
+            // location.delay(2000).reload();
+             // setTimeout(function() { window.location.reload(true); }, 1000)
+        },
+        error: function (response) {
+            // alert(response.responseText)
+            alert("User Already Exists / Enter the Correct Details !")
+            window.location.reload();
+        },
+        cache: false,
+    });
+      </script>
+    
+</div>
+
+
+</div>

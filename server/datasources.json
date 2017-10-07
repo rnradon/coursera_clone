@@ -1,0 +1,37 @@
+{
+  "gym_app_db": {
+    "name": "gym_app_db",
+    "connector": "memory"
+  },
+
+
+  "gym_app": {
+    "host": "ds163494.mlab.com",
+    "port": 63494,
+    "url": "mongodb://root:12345@ds163494.mlab.com:63494/coursera",
+    "database": "coursera",
+    "password": "12345",
+    "name": "root",
+    "user": "root",
+    "connector": "mongodb"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "appbiometric@gmail.com",
+          "pass": "oymyxzyaxokshkpn"
+        }
+      }
+    ]
+  }
+}

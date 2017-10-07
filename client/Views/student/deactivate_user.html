@@ -1,0 +1,61 @@
+<div ng-include src="'Views/student/header.html'" style="padding-top: 20px; padding-left: 20px;"></div>
+<div class="col-md-3 col-sm-2">
+</div>
+<div class="col-md-6 col-sm-8" style="margin-top: 15%; text-align: center;">
+	<h2>We'll miss you. :( </h2>
+	<div class="help-block">Are you sure you want to delete all your details permanently. </div>
+	<form id="myForm" action="">
+		<button class="label label-danger delete" type = "submit" name = "submit" style="height: 40px; width: 65px;">Delete !</button>
+	</form>
+
+	<script>
+
+      $(".delete").click(function(event){
+        alert("HEY")
+        var unsorted_url = window.location.pathname.split('userId=');
+        unsorted_url = unsorted_url[1].split('/access_token=');
+        console.log(unsorted_url)
+        var access_token = unsorted_url[1]
+        var userId = unsorted_url[0]
+        console.log("access_token " + access_token)
+
+        // alert("WORKING")
+        var url = '/api/students/' + userId + '?' + 'access_token=' + access_token
+        alert(url)
+        alert("=====")
+
+         $('#myForm')
+        .ajaxForm({
+            method: 'DELETE',
+            url : url, // or whatever
+            dataType : 'json',
+            
+            success : function (response) {
+                alert("All your details have been moved to bin. Redirecting to the Login.")
+                // var app = angular.module('my_app', []);
+                // app.controller('myCtrl', function($scope, $http) {
+                //   $http.get('/api/gym_users/findOne?filter[where][registration_number]=' + reg_number + '&' + access_token)
+                //   .then(function(response) {
+                //       $scope.myWelcome = response.data;
+                //   });
+                // });
+                var url = '/'
+                window.location.href = url; //CHANGE THIS TO VIEW USER CARD
+            },
+            error: function (response) {
+              alert("ERROR")
+                // alert(response)
+                console.log(response)
+                // setTimeout(function() { window.location.reload(true); }, 2000)
+            },
+            cache: false,
+        });
+          
+        });
+      
+      </script>
+
+</div>
+<div class="col-md-3 col-sm-2">
+</div>
+
